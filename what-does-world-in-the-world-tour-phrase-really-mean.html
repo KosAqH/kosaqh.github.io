@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>    What does 'World' in the 'World tour' phrase really mean?
+</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Merriweather:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/theme/css/cid.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+            <div class="container">
+
+<header class="blog-header">
+    <h1><a href="/">KosAqH's Blog</a></h1>
+    <p></p>
+    <nav>
+        <a href="/cv">My CV</a>
+        <a href="https://github.com/kosaqh">My Github</a>
+    </nav>
+</header>
+
+    <div class="post">
+
+        <header>
+            <h1>What does 'World' in the 'World tour' phrase really mean?</h1>
+            <p class="date">Written on <time datetime="2023-11-23T12:00:00+01:00">lis 23, 2023</time></p>
+        </header>
+
+        <article>
+            <p>Scrolling the Internet you can often see complaining (that became a <a href="https://www.reddit.com/r/memes/comments/r1rwx8/world_tour/">meme</a> at this point) about world tours that skip a lot of countries and entire continents. It intuitively feels like truth, but I wanted to gather data and find proof of it.</p>
+<p>To achieve this, I gathered data regarding the biggest music world tours in history and I analysed the locations of all concerts.</p>
+<h2>Data source</h2>
+<p>I've used Wikipedia as my data source. I decided to analyse tours that I found in a few tables coming from two articles:</p>
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/List_of_most-attended_concert_tours">List of most attended concert tours</a></p>
+<ul>
+<li>Table <a href="https://en.wikipedia.org/wiki/List_of_most-attended_concert_tours#Over_5_million_attendance">Tours attended by 5 million people or more</a> </li>
+<li>Table <a href="https://en.wikipedia.org/wiki/List_of_most-attended_concert_tours#3.5–4.9_million_attendance">Tours attended by 3.5 to 4.9 million people</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/List_of_highest-grossing_concert_tours">List of highest-grossing concert tours</a></p>
+<ul>
+<li>Table <a href="https://en.wikipedia.org/wiki/List_of_highest-grossing_concert_tours#Timeline_of_the_highest-grossing_tour">Top 20 highest-grossing tours of all time</a></li>
+<li>Table <a href="https://en.wikipedia.org/wiki/List_of_highest-grossing_concert_tours#Timeline_of_the_highest-grossing_tour">Timeline of the highest-grossing tour record</a></li>
+</ul>
+</li>
+</ul>
+<p>If you want to see how I scraped and transformed data, you should check out <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">this notebook</a> from my repo.</p>
+<p>Some tours from those lists are still going on. Therefore I have to say that data was scraped on 22 Nov 2023.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Both those Wikipedia articles are updated very often. I also removed some tours from my dataset, because I couldn't find proof that it was intended to be a world tour. The full list of tours examined during analysis is <a href="">in my repo</a>.</p>
+</div>
+<h2>Initial analysis</h2>
+<p>After transforming and cleaning my dataset I gathered the first information. First of all, I found out that I have 7397 concerts coming from 50 concert tours. 
+These were performed on all (populated) continents, in 607 unique cities across 79 countries. At this point, we can already see, that much more than 100 countries never hosted any concert from those biggest tours.</p>
+<p>After checking the value counts of concert locations by continent I came to my first conclusion:
+- More than half of the concerts took part in North America.
+- Very small fractions of those events took part in Africa. There are only 31 of them, making 0.42% of the dataset.
+- Australia and Oceania hosted a lot of examined concerts, regarding the population of this continent.</p>
+<p><img alt="Concerts count by continent" src="./images/fig_count_by_continent.png"></p>
+<h2>Map visualization</h2>
+<p>They say that a picture is worth a thousand words, so I think the most important thing is to plot the locations of concerts on a map. The bigger size and darker colour of the markers mean that more concerts were held in that place.</p>
+<p><img alt="Concerts location worldwide" src="./images/fig_map_world.png"></p>
+<p>In a few countries (I'd say the USA, Canada, Australia) <a href="https://xkcd.com/1138/">it looks like a population density map</a>. It's not the case for the rest of the world. Globally we can already see that South America, Africa and Asia held very of world tour events. You can see also some disproportions in Europe. Concerts there concentrate in the UK, Germany, France, Northern Italy and Benelux countries. Southern and Eastern Europe and even Spain and Portugal seem to be hosts of world tour concerts much less often.</p>
+<p><img alt="Concerts location in Europe" src="./images/fig_map_europe.png"></p>
+<iframe src="test_fig.html"  id="igraph" scrolling="no" style="border:none;" seamless="seamless"  height="525" width="100%">
+</iframe>
+
+<h2>Further analysis</h2>
+<p>Those map visualizations are actually enough to learn what 'world' means in the 'world tour' phrase. But if you're interested more, then there is more deep-dive analysis.</p>
+<h3>Concerts by country</h3>
+<p>Then I plotted 20 countries that most frequently hosted concerts from my dataset. The only one, but kinda big, surprise was how disproportional is number of concerts that were located in the United States than in any other country.</p>
+<p>We can also see, that 4 out of 5 top countries are (mostly) English speaking. It may be an important factor, considering that most famous artists usually sing in English.</p>
+<p><img alt="Top 20 most frequently hosting countries" src="./images/fig_count_by_countries_top20.png"></p>
+<p>The next step was examining countries on individual continents. I decided to not plot this, because data distributions are very skewed, so plots aren't readable well.</p>
+<p>First, looking at Oceania we can see that there are only Australia and New Zealand. It's not very surprising, considering that other countries there are located on small islands with small populations. Still, count of concerts in those two countries is very high regarding their population.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Australia</td>
+<td style="text-align: right;">401</td>
+</tr>
+<tr>
+<td style="text-align: left;">New Zealand</td>
+<td style="text-align: right;">81</td>
+</tr>
+</tbody>
+</table>
+<p>In Africa, we can see, that almost all concerts took place in the South Africa Republic. Individual events were held in Tunisia and Morocco</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">South Africa</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr>
+<td style="text-align: left;">Morocco</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tunisia</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>South America seems to be probably the least surprising continent. I would personally expect more world tour concerts held in Uruguay. It's a small country, but according to <a href="https://www.imf.org/external/datamapper/NGDPDPC@WEO/OEMDC/ADVEC/WEOWORLD">this data</a> it has also the biggest GDP per capita on this continent.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Brazil</td>
+<td style="text-align: right;">103</td>
+</tr>
+<tr>
+<td style="text-align: left;">Argentina</td>
+<td style="text-align: right;">89</td>
+</tr>
+<tr>
+<td style="text-align: left;">Chile</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td style="text-align: left;">Colombia</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">Peru</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ecuador</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Uruguay</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Paraguay</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>In North America, there is a big disproportion between the United States and other countries, but we already know this. Canada seems to be a similar case to Australia and New Zealand - English English-speaking country with a very good economy. </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">United States</td>
+<td style="text-align: right;">3456</td>
+</tr>
+<tr>
+<td style="text-align: left;">Canada</td>
+<td style="text-align: right;">417</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mexico</td>
+<td style="text-align: right;">95</td>
+</tr>
+<tr>
+<td style="text-align: left;">Costa Rica</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr>
+<td style="text-align: left;">Puerto Rico</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dominican Republic</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Guatemala</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Panama</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">El Salvador</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Honduras</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>In Asia, we have another very skewed distribution. The majority of concerts are held in Japan. The surprisingly large count is for Singapur - another English-speaking, wealthy country. I would also assume that South Korea gets much more events than it actually has.</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Japan</td>
+<td style="text-align: right;">156</td>
+<td>Israel</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr>
+<td>Singapore</td>
+<td style="text-align: right;">36</td>
+<td>Indonesia</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>Taiwan</td>
+<td style="text-align: right;">16</td>
+<td>United Arab Emirates</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>Thailand</td>
+<td style="text-align: right;">15</td>
+<td>China</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>Philippines</td>
+<td style="text-align: right;">12</td>
+<td>India</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td>Malaysia</td>
+<td style="text-align: right;">11</td>
+<td>Macau</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Hong Kong</td>
+<td style="text-align: right;">11</td>
+<td>Bahrain</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>South Korea</td>
+<td style="text-align: right;">10</td>
+<td>Brunei</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>In the Europe we have the most unique countries, that were hosting world tour shows. However, almost half of them hosted not more than 10 such events. Countries with the biggest count of concerts are localised in western and central part of Europe. Eastern and southern Europe gets much less of those.</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+<th>Country</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Germany</td>
+<td style="text-align: right;">411</td>
+<td>Denmark</td>
+<td style="text-align: right;">71</td>
+<td>Hungary</td>
+<td style="text-align: right;">22</td>
+<td>Luxembourg</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>England</td>
+<td style="text-align: right;">381</td>
+<td>Austria</td>
+<td style="text-align: right;">60</td>
+<td>Greece</td>
+<td style="text-align: right;">16</td>
+<td>Monaco</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>France</td>
+<td style="text-align: right;">209</td>
+<td>Scotland</td>
+<td style="text-align: right;">57</td>
+<td>Northern Ireland</td>
+<td style="text-align: right;">15</td>
+<td>Montenegro</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Netherlands</td>
+<td style="text-align: right;">144</td>
+<td>Norway</td>
+<td style="text-align: right;">51</td>
+<td>Romania</td>
+<td style="text-align: right;">12</td>
+<td>Lithuania</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Italy</td>
+<td style="text-align: right;">142</td>
+<td>Poland</td>
+<td style="text-align: right;">43</td>
+<td>Croatia</td>
+<td style="text-align: right;">8</td>
+<td>Cyprus</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Spain</td>
+<td style="text-align: right;">135</td>
+<td>Portugal</td>
+<td style="text-align: right;">38</td>
+<td>Estonia</td>
+<td style="text-align: right;">7</td>
+<td>Bosnia and Herzegovina</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Sweden</td>
+<td style="text-align: right;">96</td>
+<td>Finland</td>
+<td style="text-align: right;">35</td>
+<td>Serbia</td>
+<td style="text-align: right;">7</td>
+<td>Latvia</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Ireland</td>
+<td style="text-align: right;">92</td>
+<td>Wales</td>
+<td style="text-align: right;">33</td>
+<td>Turkey</td>
+<td style="text-align: right;">6</td>
+<td>Slovenia</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Belgium</td>
+<td style="text-align: right;">83</td>
+<td>Czech Republic</td>
+<td style="text-align: right;">27</td>
+<td>Bulgaria</td>
+<td style="text-align: right;">5</td>
+<td>Malta</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Switzerland</td>
+<td style="text-align: right;">77</td>
+<td>Russia</td>
+<td style="text-align: right;">24</td>
+<td>Iceland</td>
+<td style="text-align: right;">3</td>
+<td>Slovakia</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<h3>World tours distribution</h3>
+<p>According to data, only 5 out of 50 examined tours had events hosted on all continents. 14 out of 50 were hosted on not more than 3 continents, with so-called <a href="https://en.wikipedia.org/wiki/The_Garth_Brooks_World_Tour_(2014–2017)">'The Garth Brooks World Tour (2014–2017)'</a> with the world being US and Canada.</p>
+<p>Ed Sheeran during his <a href="https://en.wikipedia.org/wiki/÷_Tour">÷ Tour</a> visited 49 countries. It's the biggest number of visited countries during one tour in my dataset. Needless to say, it was one of the all-continent tours.</p>
+<h2>Final conclusions</h2>
+<p>The popular meme is true. It really seems that in the dictionary of world-famous artists world means mostly the US, Canada, Western Europe and sometimes Australia and Japan. It doesn't surprise me, but is good to have evidence for that.</p>
+<p>What's more surprising is how big is the difference between the United States and any other country. Among the most interesting things I found out here, is also the large count of concerts held in Australia, Canada and New Zealand in comparison to the population of those places.</p>
+<p>It also seems to be a universal key for the most common countries - they tend to be very wealthy (rather obvious) and English-speaking (now it also seems obvious, but it wasn't like this before) countries. We need to keep in mind that almost all of those artists sing in English and come from the UK or the USA.</p>
+<h2>Links</h2>
+<ul>
+<li><a href="">Code repository</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_highest-grossing_concert_tours">List of highest-grossing concert tours</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_most-attended_concert_tours">List of most attended concert tours</a></li>
+<li><a href="https://matplotlib.org/stable/gallery/subplots_axes_and_figures/broken_axis.html">How to broke y-axis using matplotlib</a></li>
+</ul>
+        </article>
+
+        <footer>
+            <p>This entry is posted in <a href="/category/data-analysis.html">Data Analysis</a>.</p>
+        </footer>
+
+
+    </div>
+
+
+<footer class="blog-footer">
+
+    <ul class="nav">
+    </ul>
+
+    <p class="disclaimer">
+    Built with <a href="http://getpelican.com">Pelican</a>, and slightly modified <a href="https://github.com/hdra/Pelican-Cid">Cid</a> theme.
+    </p>
+</footer>
+            </div>
+    </body>
+</html>
